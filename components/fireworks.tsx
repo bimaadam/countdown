@@ -1,3 +1,4 @@
+// components/fireworks.tsx
 import { useEffect, useRef } from "react";
 
 const Fireworks: React.FC = () => {
@@ -5,10 +6,10 @@ const Fireworks: React.FC = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return; // Check if canvas is null
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) return; // Ensure ctx is not null
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -55,6 +56,7 @@ const Fireworks: React.FC = () => {
     }
 
     function drawParticles() {
+      if (!ctx) return; // Ensure ctx is not null before drawing
       particles.forEach((particle) => {
         ctx.save();
         ctx.globalAlpha = particle.alpha;
@@ -68,6 +70,7 @@ const Fireworks: React.FC = () => {
     }
 
     function loop() {
+      if (!ctx) return; // Ensure ctx is not null before clearing
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       drawParticles();
@@ -76,7 +79,7 @@ const Fireworks: React.FC = () => {
       requestAnimationFrame(loop);
     }
 
-    // Fireworks otomatis di tengah
+    // Fireworks automatically in the center
     const interval = setInterval(() => {
       createParticle(window.innerWidth / 2, window.innerHeight / 2);
     }, 500);
