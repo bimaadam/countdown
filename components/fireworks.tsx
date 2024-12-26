@@ -70,8 +70,8 @@ const Fireworks: React.FC = () => {
     }
 
     function loop() {
-      if (!ctx) return; // Ensure ctx is not null before clearing
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!ctx || !canvas) return; // Ensure ctx and canvas are not null before clearing
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Now safe to access canvas.width and canvas.height
 
       drawParticles();
       updateParticles();
